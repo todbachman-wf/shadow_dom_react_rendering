@@ -17,7 +17,10 @@ mixin CapsuleProps on UiProps {
 }
 
 class CapsuleComponent extends UiComponent2<CapsuleProps> {
-  DivElement _divRef;
+  final Ref<DivElement> _divRef = createRef();
+
+  @override
+  bool shouldComponentUpdate(Map nextProps, Map nextState) => false;
 
   @override
   Map get defaultProps {
@@ -29,9 +32,9 @@ class CapsuleComponent extends UiComponent2<CapsuleProps> {
     super.componentDidMount();
     if (props.didMountCallback != null) {
       if (props.attachShadow) {
-        addShadowRoot(_divRef, allowInterop(props.didMountCallback));
+        addShadowRoot(_divRef.current, allowInterop(props.didMountCallback));
       } else {
-        props.didMountCallback(_divRef);
+        props.didMountCallback(_divRef.current);
       }
     }
   }
@@ -40,13 +43,11 @@ class CapsuleComponent extends UiComponent2<CapsuleProps> {
   dynamic render() {
     return (Dom.div()
       ..className = 'capsule-host'
+      ..ref = _divRef
       ..style = {
         'margin': '5px',
         'padding': '5px',
         'border': props.attachShadow ? 'solid 2px red' : 'dotted 2px green'
-      }
-      ..ref = (ref) {
-        _divRef = ref as DivElement;
       })();
   }
 }

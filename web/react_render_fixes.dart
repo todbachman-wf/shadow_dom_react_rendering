@@ -6,7 +6,7 @@ import 'dart:html';
 import 'package:js/js.dart';
 
 @JS('ReactDOM.render')
-external dynamic reactdomRender(dynamic toRender, Node whatever);
+external dynamic reactdomRender(dynamic element, Node mountNode);
 
 @JS('Function')
 external Function(Node, Function(Node)) JSFunction(
