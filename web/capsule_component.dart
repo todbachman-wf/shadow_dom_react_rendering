@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:js/js.dart';
 import 'package:over_react/over_react.dart';
 
 import 'react_render_fixes.dart';
@@ -28,7 +29,7 @@ class CapsuleComponent extends UiComponent2<CapsuleProps> {
     super.componentDidMount();
     if (props.didMountCallback != null) {
       if (props.attachShadow) {
-        addShadowRoot(_divRef, props.didMountCallback);
+        addShadowRoot(_divRef, allowInterop(props.didMountCallback));
       } else {
         props.didMountCallback(_divRef);
       }

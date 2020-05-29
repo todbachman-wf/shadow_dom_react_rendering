@@ -29,6 +29,10 @@ void renderFoo(Node node) {
 
 void Function(Node node) renderIndirectly(String buttonName) => (Node node) {
       var host = DivElement();
+      host.style
+        ..border = 'dashed 2px blue'
+        ..margin = '5px'
+        ..padding = '5px';
       node.append(host);
       reactdomRender(renderButton(buttonName), host);
     };
